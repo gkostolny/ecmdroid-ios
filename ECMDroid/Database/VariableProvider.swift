@@ -127,7 +127,7 @@ final class VariableProvider {
         guard let row = row else { return nil }
         let v = Variable()
 
-        v.id = (row["uniqueid"] as? Int) ?? 0
+        v.id = intValue(row["uniqueid"])
         if let typeStr = row["ecm_type"] as? String {
             v.ecmType = ECMType.getType(typeStr)
         }
@@ -135,17 +135,21 @@ final class VariableProvider {
         if let typeStr = row["type"] as? String {
             v.type = Variable.DataType(rawValue: typeStr.uppercased()) ?? .scalar
         }
-        v.size = (row["size"] as? Int) ?? 0
+        v.size = intValue(row["size"])
         if source == .eeprom {
-            v.width = (row["elemsize"] as? Int) ?? 1
-            v.cols = (row["cols"] as? Int) ?? 0
-            v.rows = (row["rows"] as? Int) ?? 0
+            v.width = intValue(row["elemsize"], default: 1)
+            v.cols = intValue(row["cols"])
+            v.rows = intValue(row["rows"])
         } else {
             v.width = v.size
         }
-        v.offset = (row["offset"] as? Int) ?? 0
-        v.scale = (row["scale"] as? Double) ?? ((row["scale"] as? Int).map { Double($0) } ?? 0)
-        v.translate = (row["translate"] as? Double) ?? ((row["translate"] as? Int).map { Double($0) } ?? 0)
+        v.offset = intValue(row["offset"])
+        // The bundled database stores its calibration and range values as SQLite
+        // TEXT (for example, "0.10000" and "-40.00000"). sqlite3 therefore
+        // exposes them as String, not Double/Int. Parse all numeric representations
+        // here so live values are scaled and translated correctly.
+        v.scale = doubleValue(row["scale"])
+        v.translate = doubleValue(row["translate"])
         v.format = row["format"] as? String
         v.label = (row["name"] as? String) ?? ""
         v.remarks = (row["remark"] as? String) ?? ""
@@ -156,13 +160,41 @@ final class VariableProvider {
         }
 
         if source == .runtimeData {
-            v.low = (row["low"] as? Double) ?? ((row["low"] as? Int).map { Double($0) } ?? 0)
-            v.high = (row["high"] as? Double) ?? ((row["high"] as? Int).map { Double($0) } ?? 0)
-            v.ulow = (row["ulow"] as? Int) ?? 0
-            v.uhigh = (row["uhigh"] as? Int) ?? 0
+            v.low = doubleValue(row["low"])
+            v.high = doubleValue(row["high"])
+            v.ulow = intValue(row["ulow"])
+            v.uhigh = intValue(row["uhigh"])
         }
 
         v.initialize()
         return v
+    }
+
+    private func intValue(_ value: Any?, default fallback: Int = 0) -> Int {
+        switch value {
+        case let value as Int:
+            return value
+        case let value as NSNumber:
+            return value.intValue
+        case let value as String:
+            return Int(value) ?? Double(value).map(Int.init) ?? fallback
+        default:
+            return fallback
+        }
+    }
+
+    private func doubleValue(_ value: Any?, default fallback: Double = 0) -> Double {
+        switch value {
+        case let value as Double:
+            return value
+        case let value as Int:
+            return Double(value)
+        case let value as NSNumber:
+            return value.doubleValue
+        case let value as String:
+            return Double(value) ?? fallback
+        default:
+            return fallback
+        }
     }
 }

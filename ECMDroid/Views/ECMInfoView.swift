@@ -10,6 +10,7 @@ struct ECMInfoView: View {
     @State private var isReadingEEPROM = false
     @State private var errorMessage: String?
     @State private var showError = false
+    @State private var showRereadConfirm = false
 
     var body: some View {
         NavigationStack {
@@ -71,7 +72,11 @@ struct ECMInfoView: View {
                     // Read EEPROM action
                     Section {
                         Button {
-                            readEEPROM()
+                            if ecm.hasUnsavedEEPROMChanges {
+                                showRereadConfirm = true
+                            } else {
+                                readEEPROM()
+                            }
                         } label: {
                             HStack {
                                 if isReadingEEPROM {
@@ -100,6 +105,18 @@ struct ECMInfoView: View {
             Button("OK") {}
         } message: {
             Text(errorMessage ?? "Unknown error")
+        }
+        .confirmationDialog(
+            "Discard unsaved EEPROM changes?",
+            isPresented: $showRereadConfirm,
+            titleVisibility: .visible
+        ) {
+            Button("Re-read and Discard Changes", role: .destructive) {
+                readEEPROM()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Re-reading replaces every staged EEPROM edit with the values currently stored in the ECM. This cannot be undone unless you saved a backup.")
         }
     }
 
