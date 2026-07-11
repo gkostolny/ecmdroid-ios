@@ -521,8 +521,6 @@
 				INFOPLIST_FILE = ECMDroid/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ECMDroid;
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "ECMDroid needs Bluetooth to communicate with your ECM module.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ECMDroid connects to an ECM simulator on your local network for testing without the motorcycle.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -559,8 +557,6 @@
 				INFOPLIST_FILE = ECMDroid/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ECMDroid;
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
-				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "ECMDroid needs Bluetooth to communicate with your ECM module.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ECMDroid connects to an ECM simulator on your local network for testing without the motorcycle.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
