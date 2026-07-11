@@ -106,6 +106,28 @@ func runUnitTests(_ t: TestRunner) async {
         }
     }
 
+    await t.test("VariableProvider: parses text-backed calibration values") {
+        guard let tps = VariableProvider.shared.getRtVariable(ecm: "BUEIB", name: Variables.TPD),
+              let clt = VariableProvider.shared.getRtVariable(ecm: "BUEIB", name: Variables.CLT) else {
+            t.expect(false, "TPS and coolant channels should exist"); return
+        }
+
+        t.expect(abs(tps.scale - 0.1) < 0.000_001, "TPS scale parsed from SQLite text")
+        t.expectEqual(tps.high, 900, "TPS upper range parsed from SQLite text")
+        t.expect(abs(clt.translate + 40) < 0.000_001, "coolant translation parsed from SQLite text")
+
+        var packet = [UInt8](repeating: 0, count: 107)
+        packet[tps.offset] = 0xD2 // 1234, little endian
+        packet[tps.offset + 1] = 0x04
+        packet[clt.offset] = 0xBC // 700, little endian -> 30.0 °C
+        packet[clt.offset + 1] = 0x02
+        tps.refreshValue(from: packet)
+        clt.refreshValue(from: packet)
+
+        t.expect(abs((tps.rawValues[0] as? Double ?? 0) - 123.4) < 0.000_001, "TPS is scaled")
+        t.expectEqual(clt.intValue, 30, "coolant is translated")
+    }
+
     await t.test("TorqueData: reference data is populated") {
         t.expect(!TorqueData.categories.isEmpty, "categories present")
         let specCount = TorqueData.categories.reduce(0) { $0 + $1.specs.count }

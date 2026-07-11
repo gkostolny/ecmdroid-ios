@@ -348,8 +348,8 @@ private struct VariableItemRow: View {
             return (title, "", false)
         }
         let formatted = v.formattedValue
-        let symbol = Units.getSymbol(v.unit)
-        let display = formatted.isEmpty ? "N/A" : "\(formatted)\(symbol)"
+        // formattedValue already includes Variable.symbol.
+        let display = formatted.isEmpty ? "N/A" : formatted
         return (title, display, true)
     }
 }

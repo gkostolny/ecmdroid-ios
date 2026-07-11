@@ -34,6 +34,11 @@ class ECM {
     private var bleManager: BLEManager {
         if let manager = _bleManager { return manager }
         let manager = BLEManager()
+        manager.onConnectionLost = { [weak self] in
+            Task { @MainActor in
+                self?.handleTransportDisconnected()
+            }
+        }
         _bleManager = manager
         return manager
     }
@@ -84,16 +89,31 @@ class ECM {
 
     func disconnect() {
         stopReading()
+        stopRecording()
         _bleManager?.disconnect()
         if let tcpPort = serialPort as? TCPSerialPort {
             Task { await tcpPort.close() }
         }
+        clearConnectionState(status: "Disconnected")
+    }
+
+    /// Called by BLEManager when a peripheral drops unexpectedly. This follows the
+    /// same cleanup path as an explicit disconnect, but does not attempt to cancel
+    /// a connection CoreBluetooth has already torn down.
+    private func handleTransportDisconnected() {
+        guard isConnected || serialPort != nil else { return }
+        stopReading()
+        stopRecording()
+        clearConnectionState(status: "Connection lost")
+    }
+
+    private func clearConnectionState(status: String) {
         serialPort = nil
         command = nil
         isConnected = false
         rtData = nil
         pristineData = nil
-        statusMessage = "Disconnected"
+        statusMessage = status
     }
 
     // MARK: - EEPROM Setup
@@ -217,6 +237,7 @@ class ECM {
 
     var isRecording = false
     private var recordingTask: Task<Void, Never>?
+    private var recordingSessionID: UUID?
     private var logOutputStream: OutputStream?
     var bytesLogged: Int = 0
     var recordsLogged: Int = 0
@@ -247,12 +268,18 @@ class ECM {
         recordingStartTime = Date()
         recordingInterval = interval
         isRecording = true
+        let sessionID = UUID()
+        recordingSessionID = sessionID
 
         recordingTask = Task { [weak self] in
             while !Task.isCancelled {
-                guard let self, let cmd = self.command, self.isRecording else { break }
+                guard let self,
+                      let cmd = self.command,
+                      self.isRecording,
+                      self.recordingSessionID == sessionID else { break }
                 do {
                     let data = try await cmd.readRTData()
+                    guard self.isRecording, self.recordingSessionID == sessionID else { break }
                     await MainActor.run {
                         self.rtData = data
                     }
@@ -267,7 +294,7 @@ class ECM {
                 try? await Task.sleep(nanoseconds: ns)
             }
             await MainActor.run { [weak self] in
-                self?.isRecording = false
+                self?.finishRecording(sessionID: sessionID)
             }
         }
     }
@@ -320,11 +347,25 @@ class ECM {
     }
 
     func stopRecording() {
+        recordingSessionID = nil
         recordingTask?.cancel()
         recordingTask = nil
         isRecording = false
         logOutputStream?.close()
         logOutputStream = nil
+        recordingStartTime = nil
+    }
+
+    private func finishRecording(sessionID: UUID) {
+        // A cancelled task from an older recording can finish after a new session
+        // starts. Only the task that owns the active session may close its stream.
+        guard recordingSessionID == sessionID else { return }
+        recordingSessionID = nil
+        recordingTask = nil
+        isRecording = false
+        logOutputStream?.close()
+        logOutputStream = nil
+        recordingStartTime = nil
     }
 
     // MARK: - Errors

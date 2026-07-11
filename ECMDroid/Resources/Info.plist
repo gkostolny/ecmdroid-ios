@@ -6,5 +6,7 @@
 	<string>ECMDroid needs Bluetooth to communicate with your Buell motorcycle's ECM via a BLE serial adapter.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>ECMDroid needs Bluetooth to communicate with your Buell motorcycle's ECM via a BLE serial adapter.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>ECMDroid uses your local network only when you connect to an ECM simulator running on another device.</string>
 </dict>
 </plist>

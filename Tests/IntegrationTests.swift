@@ -186,9 +186,15 @@ func runIntegrationTests(_ t: TestRunner, host: String, port: UInt16) async {
     }
 
     await t.test("ECM: disconnect tears down the session") {
+        let logURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("disconnect-\(UUID().uuidString).bin")
+        try ecm.startRecording(to: logURL, interval: 0.1)
+        await sleepMs(150)
         ecm.disconnect()
         t.expect(!ecm.isConnected, "disconnected")
+        t.expect(!ecm.isRecording, "disconnect stops recording immediately")
         t.expect(ecm.pristineData == nil, "pristine cleared")
+        try? FileManager.default.removeItem(at: logURL)
         await sleepMs(300) // let the sim notice and re-listen
     }
 

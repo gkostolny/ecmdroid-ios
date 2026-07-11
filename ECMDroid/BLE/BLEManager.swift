@@ -42,6 +42,9 @@ class BLEManager: NSObject {
     var isScanning = false
     var bluetoothState: CBManagerState = .unknown
     var connectedPeripheral: CBPeripheral?
+    /// Called when an established peripheral disconnects without ECM initiating it.
+    /// ECM uses this to clear its session and disable potentially unsafe controls.
+    var onConnectionLost: (() -> Void)?
 
     private var centralManager: CBCentralManager!
     fileprivate var connectContinuation: CheckedContinuation<BLESerialPort, Error>?
@@ -110,6 +113,9 @@ class BLEManager: NSObject {
         if let peripheral = connectedPeripheral {
             logger.info("Disconnecting from \(peripheral.name ?? "Unknown", privacy: .public)")
             centralManager.cancelPeripheralConnection(peripheral)
+        }
+        if let serialPort = currentSerialPort {
+            Task { await serialPort.close() }
         }
         currentAdapter?.disconnect()
         currentAdapter = nil
@@ -218,12 +224,16 @@ extension BLEManager: CBCentralManagerDelegate {
         } else {
             logger.info("Disconnected from \(peripheral.name ?? "Unknown", privacy: .public)")
         }
-        if peripheral == connectedPeripheral {
+        let wasConnected = peripheral == connectedPeripheral
+        if wasConnected {
+            let serialPort = currentSerialPort
             connectedPeripheral = nil
             currentAdapter?.disconnect()
             currentAdapter = nil
             currentSerialPort = nil
             peripheralDelegate = nil
+            Task { await serialPort?.close() }
+            onConnectionLost?()
         }
         // If the peripheral dropped while connection setup was still in flight
         // (e.g. dongle power dips at key-on), fail the attempt immediately

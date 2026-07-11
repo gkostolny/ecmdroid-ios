@@ -36,7 +36,7 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
     private let adapter: BLEAdapter
     private var buffer: [UInt8] = []
     private var readContinuations: [CheckedContinuation<Void, Never>] = []
-    private var connected = false
+    private var disconnected = false
     private var payloadSize: Int = 20
 
     private var writeBuffer: [[UInt8]] = []
@@ -60,11 +60,12 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
     }
 
     nonisolated func adapterDidConnect() {
-        Task { await markConnected() }
+        // BLEManager owns connection setup; the serial transport becomes usable
+        // once it is returned to ECMCommand.
     }
 
     nonisolated func adapterDidFailToConnect(error: Error) {
-        // Handled by BLEManager
+        Task { await close() }
     }
 
     nonisolated func adapterDidReceiveData(_ data: Data) {
@@ -73,11 +74,7 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
     }
 
     nonisolated func adapterDidEncounterError(_ error: Error) {
-        // Handled by BLEManager
-    }
-
-    private func markConnected() {
-        connected = true
+        Task { await close() }
     }
 
     private func appendToBuffer(_ data: [UInt8]) {
@@ -93,6 +90,9 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
         let deadline = Date().addingTimeInterval(timeout)
 
         while buffer.count < count {
+            if disconnected {
+                throw BLEError.disconnected
+            }
             let remaining = deadline.timeIntervalSinceNow
             if remaining <= 0 {
                 throw BLEError.timeout
@@ -121,6 +121,7 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
     }
 
     func write(_ data: [UInt8]) async throws {
+        guard !disconnected else { throw BLEError.disconnected }
         guard let writeChar = adapter.writeCharacteristic() else {
             throw BLEError.writeCharacteristicNotFound
         }
@@ -147,6 +148,7 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
             if writeType == .withoutResponse {
                 var attempts = 0
                 while true {
+                    if disconnected { throw BLEError.disconnected }
                     let stackReady = await MainActor.run {
                         self.peripheral.canSendWriteWithoutResponse
                     }
@@ -167,5 +169,14 @@ actor BLESerialPort: BLEAdapterDelegate, SerialPort {
                 try await Task.sleep(nanoseconds: 10_000_000) // 10ms
             }
         }
+    }
+
+    /// Wake in-flight reads as soon as CoreBluetooth tells us the peripheral is
+    /// gone. Without this, every command waits for the protocol timeout and the
+    /// UI continues to look connected after an adapter power loss.
+    func close() {
+        guard !disconnected else { return }
+        disconnected = true
+        wakeReaders()
     }
 }
