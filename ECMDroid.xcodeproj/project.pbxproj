@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0623222911DA85143F1C3B82 /* EEPROMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6C6C5380AA679EED9AAC1 /* EEPROMProvider.swift */; };
+		0760C8D3066625F9DF3B9F3C /* ECMInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9962BABDCA9800355E00628 /* ECMInfoView.swift */; };
+		0ED58E7EFDDA2E9024A693B5 /* BitSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECD3A2F9389F3BF338B828 /* BitSetModel.swift */; };
+		1BBA230A3FA95175353ED7FE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 81878DD37A1EA72DA80D33C2 /* libsqlite3.tbd */; };
+		1DD744256FB5ED6CB4079C9C /* BLESerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66BEA981B0B69A036C7299A /* BLESerialPort.swift */; };
+		1E505A003963ADF9D8547C54 /* ecmdroid.db in Resources */ = {isa = PBXBuildFile; fileRef = 950D8487F5847E0478DC936B /* ecmdroid.db */; };
+		213684E240B28C69A49C38BA /* ECMCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE054F05B7A3E0DB37C93A /* ECMCommand.swift */; };
+		22E76B30FB6D0C6C6C764628 /* ECMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D3A1BD34904C5F6D6D696E /* ECMError.swift */; };
+		2F331F412DF24E57E5560039 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED9BF0F9161F681C85574D1 /* Variable.swift */; };
+		30486057752DE0F693F24090 /* ECMDroidApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F710C6D0D283F28FF62263C8 /* ECMDroidApp.swift */; };
+		3857386A2DCE26C7B9F8D083 /* CC254xAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF5633B705197D1EB2A7FE1 /* CC254xAdapter.swift */; };
+		3A0F1A57C80A31FD6E625F31 /* RN4870Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48329CD14BE24D6E3402FDC3 /* RN4870Adapter.swift */; };
+		405C33BF3FC4605AFED2D13B /* PDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3890B1B5E27A30A5CB03DC /* PDU.swift */; };
+		4B44AF9778D7DD3CA4569218 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6F6D9829ED9AF9A61B4CF3 /* DatabaseManager.swift */; };
+		4B4CAB9C3AB1287EEBB3374B /* NRFAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF82F96605335F3428620FF /* NRFAdapter.swift */; };
+		61FB88AF5688179D552F739B /* BLEAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CF5BB2C045874C4EA4931 /* BLEAdapterProtocol.swift */; };
+		6CE179ED75D994D07A9A9127 /* DataChannelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AD7CDE6D5F0A25793077B0 /* DataChannelRow.swift */; };
+		774A177F0CD0D70380FE47C6 /* BitSetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B7C43E4D3BE2FF87840950 /* BitSetProvider.swift */; };
+		7B89C30A2D739018EDD1DA89 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A7A1C803ACE38090BF26E1 /* Constants.swift */; };
+		8A917DA6F8774424EDE67B50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85E428289495CB5584DB0C46 /* Assets.xcassets */; };
+		8EB6788573F5BE9CB39A3E7C /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3325AAFBFF9243A727208D12 /* VariableProvider.swift */; };
+		9FE00530601A3991550F5621 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394D846E316B0A4CD2F5BCF3 /* CoreBluetooth.framework */; };
+		A79C90C93E30A5E92C891390 /* EEPROM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F53B8C398BE62EA0CCBD9 /* EEPROM.swift */; };
+		AA1B2C3D4E5F6A7B8C9D0E1F /* ActiveTestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C3D4E5F6A7B8C9D0E1F2A /* ActiveTestsView.swift */; };
+		B1C573EAE1429B49B843CD5E /* ECM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354C805C643860B33EF8628 /* ECM.swift */; };
+		B36178D86E034DA94CCA1995 /* TelitTIOAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615DF0D9584235CD79C534C /* TelitTIOAdapter.swift */; };
+		BDFC440F3CB62CCB009F8885 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC675A232B83B8E4F8AD /* ContentView.swift */; };
+		11AA22BB33CC44DD55EE66F1 /* EEPROMBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */; };
+		11AA22BB33CC44DD55EE66F3 /* ECM+EEPROMEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */; };
+		11AA22BB33CC44DD55EE66F5 /* EEPROMEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */; };
+		11AA22BB33CC44DD55EE6712 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6711 /* SerialPort.swift */; };
+		11AA22BB33CC44DD55EE6714 /* TCPSerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */; };
+		11AA22BB33CC44DD55EE6701 /* TorqueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6702 /* TorqueData.swift */; };
+		11AA22BB33CC44DD55EE6703 /* TorqueValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */; };
+		11AA22BB33CC44DD55EE6705 /* LogExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6706 /* LogExporter.swift */; };
+		11AA22BB33CC44DD55EE6707 /* SavedLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */; };
+		CC3D4E5F6A7B8C9D0E1F2A3B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E5F6A7B8C9D0E1F2A3B4C /* SetupView.swift */; };
+		CD9A59C4717DFC07719CFD56 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678204A61C1DB47A8CEB7705 /* ConnectionStatusView.swift */; };
+		D01E227EC5C59A482103903D /* TroubleCodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC462C7B98BA700F817E364A /* TroubleCodesView.swift */; };
+		D3D4DD5FA8960F1A9EBD0502 /* BitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ACA4BC48F201EEF196A425 /* BitModel.swift */; };
+		E1B9C2380AA27885C1DC7EDC /* DataChannelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E7F16F2D0C7DFEC918F868 /* DataChannelsView.swift */; };
+		E689BB702439E37E79409EDB /* DeviceScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56500F6474911EA01E6D5875 /* DeviceScanView.swift */; };
+		EC5B2D3460AD5F959ED77A4E /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C04982F083F638CD3CEDAE /* BLEManager.swift */; };
+		EE5F6A7B8C9D0E1F2A3B4C5D /* DataLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6A7B8C9D0E1F2A3B4C5D6E /* DataLogView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		023F53B8C398BE62EA0CCBD9 /* EEPROM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROM.swift; sourceTree = "<group>"; };
+		09ECD3A2F9389F3BF338B828 /* BitSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitSetModel.swift; sourceTree = "<group>"; };
+		0F0CF5BB2C045874C4EA4931 /* BLEAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapterProtocol.swift; sourceTree = "<group>"; };
+		11C04982F083F638CD3CEDAE /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		2CF5633B705197D1EB2A7FE1 /* CC254xAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CC254xAdapter.swift; sourceTree = "<group>"; };
+		31E7F16F2D0C7DFEC918F868 /* DataChannelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannelsView.swift; sourceTree = "<group>"; };
+		3325AAFBFF9243A727208D12 /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
+		33F6C6C5380AA679EED9AAC1 /* EEPROMProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMProvider.swift; sourceTree = "<group>"; };
+		394D846E316B0A4CD2F5BCF3 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		48329CD14BE24D6E3402FDC3 /* RN4870Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RN4870Adapter.swift; sourceTree = "<group>"; };
+		4AEE054F05B7A3E0DB37C93A /* ECMCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECMCommand.swift; sourceTree = "<group>"; };
+		56500F6474911EA01E6D5875 /* DeviceScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceScanView.swift; sourceTree = "<group>"; };
+		678204A61C1DB47A8CEB7705 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
+		6C6F6D9829ED9AF9A61B4CF3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		7381CC675A232B83B8E4F8AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMBackup.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECM+EEPROMEditing.swift"; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMEditorView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6711 /* SerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPSerialPort.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6702 /* TorqueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueData.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueValuesView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6706 /* LogExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogExporter.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLogsView.swift; sourceTree = "<group>"; };
+		7615DF0D9584235CD79C534C /* TelitTIOAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelitTIOAdapter.swift; sourceTree = "<group>"; };
+		778913282712D34176CEC520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81878DD37A1EA72DA80D33C2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		81A62B8D74E86ACE2E0B002F /* ECMDroid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECMDroid.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AD7CDE6D5F0A25793077B0 /* DataChannelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannelRow.swift; sourceTree = "<group>"; };
+		85E428289495CB5584DB0C46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8ED9BF0F9161F681C85574D1 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		92D3A1BD34904C5F6D6D696E /* ECMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECMError.swift; sourceTree = "<group>"; };
+		9354C805C643860B33EF8628 /* ECM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECM.swift; sourceTree = "<group>"; };
+		950D8487F5847E0478DC936B /* ecmdroid.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ecmdroid.db; sourceTree = "<group>"; };
+		9AF82F96605335F3428620FF /* NRFAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NRFAdapter.swift; sourceTree = "<group>"; };
+		A66BEA981B0B69A036C7299A /* BLESerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLESerialPort.swift; sourceTree = "<group>"; };
+		B1A7A1C803ACE38090BF26E1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B9962BABDCA9800355E00628 /* ECMInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECMInfoView.swift; sourceTree = "<group>"; };
+		BB2C3D4E5F6A7B8C9D0E1F2A /* ActiveTestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTestsView.swift; sourceTree = "<group>"; };
+		D0B7C43E4D3BE2FF87840950 /* BitSetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitSetProvider.swift; sourceTree = "<group>"; };
+		D8ACA4BC48F201EEF196A425 /* BitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitModel.swift; sourceTree = "<group>"; };
+		DC462C7B98BA700F817E364A /* TroubleCodesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleCodesView.swift; sourceTree = "<group>"; };
+		DD4E5F6A7B8C9D0E1F2A3B4C /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		EC3890B1B5E27A30A5CB03DC /* PDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDU.swift; sourceTree = "<group>"; };
+		F710C6D0D283F28FF62263C8 /* ECMDroidApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECMDroidApp.swift; sourceTree = "<group>"; };
+		FF6A7B8C9D0E1F2A3B4C5D6E /* DataLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLogView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A64EF778354705E801E4DF60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FE00530601A3991550F5621 /* CoreBluetooth.framework in Frameworks */,
+				1BBA230A3FA95175353ED7FE /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C821DEA410CA3F3BD77DCF2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F710C6D0D283F28FF62263C8 /* ECMDroidApp.swift */,
+				7381CC675A232B83B8E4F8AD /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		53960EA043BE972BE33EBAD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				394D846E316B0A4CD2F5BCF3 /* CoreBluetooth.framework */,
+				81878DD37A1EA72DA80D33C2 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A154E10B558CB424A232572 /* ECMDroid */ = {
+			isa = PBXGroup;
+			children = (
+				0C821DEA410CA3F3BD77DCF2 /* App */,
+				BA2B59A0785C4A5F42A66B6E /* BLE */,
+				9CAA861552BA1BD205154533 /* Database */,
+				F02A42E373DA3AB27FDE6BDB /* Model */,
+				8CF261F828D8C0536D72AB3F /* Protocol */,
+				11AA22BB33CC44DD55EE6710 /* Transport */,
+				B64D65D9183256BC39704B0C /* Views */,
+				5F1A25A0882A0387CD3FD61C /* Resources */,
+			);
+			path = ECMDroid;
+			sourceTree = "<group>";
+		};
+		5F1A25A0882A0387CD3FD61C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85E428289495CB5584DB0C46 /* Assets.xcassets */,
+				950D8487F5847E0478DC936B /* ecmdroid.db */,
+				778913282712D34176CEC520 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8CF261F828D8C0536D72AB3F /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				EC3890B1B5E27A30A5CB03DC /* PDU.swift */,
+				4AEE054F05B7A3E0DB37C93A /* ECMCommand.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		8EFFB1717627C81C9B617395 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				2CF5633B705197D1EB2A7FE1 /* CC254xAdapter.swift */,
+				9AF82F96605335F3428620FF /* NRFAdapter.swift */,
+				48329CD14BE24D6E3402FDC3 /* RN4870Adapter.swift */,
+				7615DF0D9584235CD79C534C /* TelitTIOAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		9CAA861552BA1BD205154533 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				6C6F6D9829ED9AF9A61B4CF3 /* DatabaseManager.swift */,
+				3325AAFBFF9243A727208D12 /* VariableProvider.swift */,
+				D0B7C43E4D3BE2FF87840950 /* BitSetProvider.swift */,
+				33F6C6C5380AA679EED9AAC1 /* EEPROMProvider.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		A3D786F13F8B5749F7083D01 = {
+			isa = PBXGroup;
+			children = (
+				5A154E10B558CB424A232572 /* ECMDroid */,
+				53960EA043BE972BE33EBAD6 /* Frameworks */,
+				C0A9CFF11800A6F34065306D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		11AA22BB33CC44DD55EE6710 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				11AA22BB33CC44DD55EE6711 /* SerialPort.swift */,
+				11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */,
+			);
+			path = Transport;
+			sourceTree = "<group>";
+		};
+		B64D65D9183256BC39704B0C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				56500F6474911EA01E6D5875 /* DeviceScanView.swift */,
+				B9962BABDCA9800355E00628 /* ECMInfoView.swift */,
+				31E7F16F2D0C7DFEC918F868 /* DataChannelsView.swift */,
+				DC462C7B98BA700F817E364A /* TroubleCodesView.swift */,
+				BB2C3D4E5F6A7B8C9D0E1F2A /* ActiveTestsView.swift */,
+				DD4E5F6A7B8C9D0E1F2A3B4C /* SetupView.swift */,
+				FF6A7B8C9D0E1F2A3B4C5D6E /* DataLogView.swift */,
+				11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */,
+				11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */,
+				11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */,
+				D83C8B8300E66CBEF14B1A1F /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA2B59A0785C4A5F42A66B6E /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				0F0CF5BB2C045874C4EA4931 /* BLEAdapterProtocol.swift */,
+				11C04982F083F638CD3CEDAE /* BLEManager.swift */,
+				A66BEA981B0B69A036C7299A /* BLESerialPort.swift */,
+				8EFFB1717627C81C9B617395 /* Adapters */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		C0A9CFF11800A6F34065306D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81A62B8D74E86ACE2E0B002F /* ECMDroid.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D83C8B8300E66CBEF14B1A1F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				678204A61C1DB47A8CEB7705 /* ConnectionStatusView.swift */,
+				84AD7CDE6D5F0A25793077B0 /* DataChannelRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F02A42E373DA3AB27FDE6BDB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B1A7A1C803ACE38090BF26E1 /* Constants.swift */,
+				8ED9BF0F9161F681C85574D1 /* Variable.swift */,
+				D8ACA4BC48F201EEF196A425 /* BitModel.swift */,
+				09ECD3A2F9389F3BF338B828 /* BitSetModel.swift */,
+				023F53B8C398BE62EA0CCBD9 /* EEPROM.swift */,
+				92D3A1BD34904C5F6D6D696E /* ECMError.swift */,
+				9354C805C643860B33EF8628 /* ECM.swift */,
+				11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */,
+				11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */,
+				11AA22BB33CC44DD55EE6702 /* TorqueData.swift */,
+				11AA22BB33CC44DD55EE6706 /* LogExporter.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B6094320902F1921078C41FD /* ECMDroid */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20EC047E400299566E7BF566 /* Build configuration list for PBXNativeTarget "ECMDroid" */;
+			buildPhases = (
+				58BBD58E59087543EFE00956 /* Sources */,
+				A64EF778354705E801E4DF60 /* Frameworks */,
+				8ACC3E3A5578BABFC866425E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ECMDroid;
+			productName = ECMDroid;
+			productReference = 81A62B8D74E86ACE2E0B002F /* ECMDroid.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3ACA0E7E45C7B1DC31F067D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					B6094320902F1921078C41FD = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = DC6B70CD64E70DFA2C0F16F2 /* Build configuration list for PBXProject "ECMDroid" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3D786F13F8B5749F7083D01;
+			productRefGroup = C0A9CFF11800A6F34065306D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6094320902F1921078C41FD /* ECMDroid */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8ACC3E3A5578BABFC866425E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A917DA6F8774424EDE67B50 /* Assets.xcassets in Resources */,
+				1E505A003963ADF9D8547C54 /* ecmdroid.db in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58BBD58E59087543EFE00956 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30486057752DE0F693F24090 /* ECMDroidApp.swift in Sources */,
+				BDFC440F3CB62CCB009F8885 /* ContentView.swift in Sources */,
+				61FB88AF5688179D552F739B /* BLEAdapterProtocol.swift in Sources */,
+				EC5B2D3460AD5F959ED77A4E /* BLEManager.swift in Sources */,
+				1DD744256FB5ED6CB4079C9C /* BLESerialPort.swift in Sources */,
+				3857386A2DCE26C7B9F8D083 /* CC254xAdapter.swift in Sources */,
+				4B4CAB9C3AB1287EEBB3374B /* NRFAdapter.swift in Sources */,
+				3A0F1A57C80A31FD6E625F31 /* RN4870Adapter.swift in Sources */,
+				B36178D86E034DA94CCA1995 /* TelitTIOAdapter.swift in Sources */,
+				4B44AF9778D7DD3CA4569218 /* DatabaseManager.swift in Sources */,
+				8EB6788573F5BE9CB39A3E7C /* VariableProvider.swift in Sources */,
+				774A177F0CD0D70380FE47C6 /* BitSetProvider.swift in Sources */,
+				0623222911DA85143F1C3B82 /* EEPROMProvider.swift in Sources */,
+				7B89C30A2D739018EDD1DA89 /* Constants.swift in Sources */,
+				2F331F412DF24E57E5560039 /* Variable.swift in Sources */,
+				D3D4DD5FA8960F1A9EBD0502 /* BitModel.swift in Sources */,
+				0ED58E7EFDDA2E9024A693B5 /* BitSetModel.swift in Sources */,
+				A79C90C93E30A5E92C891390 /* EEPROM.swift in Sources */,
+				22E76B30FB6D0C6C6C764628 /* ECMError.swift in Sources */,
+				B1C573EAE1429B49B843CD5E /* ECM.swift in Sources */,
+				405C33BF3FC4605AFED2D13B /* PDU.swift in Sources */,
+				213684E240B28C69A49C38BA /* ECMCommand.swift in Sources */,
+				E689BB702439E37E79409EDB /* DeviceScanView.swift in Sources */,
+				0760C8D3066625F9DF3B9F3C /* ECMInfoView.swift in Sources */,
+				E1B9C2380AA27885C1DC7EDC /* DataChannelsView.swift in Sources */,
+				D01E227EC5C59A482103903D /* TroubleCodesView.swift in Sources */,
+				CD9A59C4717DFC07719CFD56 /* ConnectionStatusView.swift in Sources */,
+				6CE179ED75D994D07A9A9127 /* DataChannelRow.swift in Sources */,
+				AA1B2C3D4E5F6A7B8C9D0E1F /* ActiveTestsView.swift in Sources */,
+				CC3D4E5F6A7B8C9D0E1F2A3B /* SetupView.swift in Sources */,
+				EE5F6A7B8C9D0E1F2A3B4C5D /* DataLogView.swift in Sources */,
+				11AA22BB33CC44DD55EE66F1 /* EEPROMBackup.swift in Sources */,
+				11AA22BB33CC44DD55EE66F3 /* ECM+EEPROMEditing.swift in Sources */,
+				11AA22BB33CC44DD55EE66F5 /* EEPROMEditorView.swift in Sources */,
+				11AA22BB33CC44DD55EE6701 /* TorqueData.swift in Sources */,
+				11AA22BB33CC44DD55EE6703 /* TorqueValuesView.swift in Sources */,
+				11AA22BB33CC44DD55EE6705 /* LogExporter.swift in Sources */,
+				11AA22BB33CC44DD55EE6707 /* SavedLogsView.swift in Sources */,
+				11AA22BB33CC44DD55EE6712 /* SerialPort.swift in Sources */,
+				11AA22BB33CC44DD55EE6714 /* TCPSerialPort.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5F03534C5622E3E1E2726F6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASYNCTASK_MAXIMUM_PARALLEL_TASK_COUNT = 1;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5F7EF26A7D7657F706E802FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASYNCTASK_MAXIMUM_PARALLEL_TASK_COUNT = 1;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		72BE7FC54AD7504E1545CAA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ECMDroid/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ECMDroid;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "ECMDroid needs Bluetooth to communicate with your ECM module.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ECMDroid connects to an ECM simulator on your local network for testing without the motorcycle.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecmdroid.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D84F5954541F6FD5E505EB6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ECMDroid/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ECMDroid;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "ECMDroid needs Bluetooth to communicate with your ECM module.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "ECMDroid connects to an ECM simulator on your local network for testing without the motorcycle.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecmdroid.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20EC047E400299566E7BF566 /* Build configuration list for PBXNativeTarget "ECMDroid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D84F5954541F6FD5E505EB6D /* Debug */,
+				72BE7FC54AD7504E1545CAA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC6B70CD64E70DFA2C0F16F2 /* Build configuration list for PBXProject "ECMDroid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F7EF26A7D7657F706E802FE /* Debug */,
+				5F03534C5622E3E1E2726F6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3ACA0E7E45C7B1DC31F067D5 /* Project object */;
+}

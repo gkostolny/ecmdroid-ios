@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Third-party checkouts (auto-cloned by run-ecmsim.sh / run-tests.sh)
+/ecmsim/
+
+# Upstream Android sources kept locally for reference only
+/ecmdroid android/

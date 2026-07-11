@@ -1,0 +1,33 @@
+diff --git a/src/main/java/org/ecmdroid/sim/Main.java b/src/main/java/org/ecmdroid/sim/Main.java
+index 3645e83..b5a9e62 100644
+--- a/src/main/java/org/ecmdroid/sim/Main.java
++++ b/src/main/java/org/ecmdroid/sim/Main.java
+@@ -116,10 +116,25 @@ public class Main implements Callable<Integer> {
+ 			RealtimeStream rt = new RealtimeStream(ecm, config, logFile);
+ 			log.info("Waiting for incoming connection on port {}...", port);
+ 			s = socket.accept();
+-			s.setTcpNoDelay(true);
++			InputStream in;
++			OutputStream out;
++			try {
++				// A client that resets right after connecting (e.g. an app being
++				// killed mid-connect) makes these calls throw; don't let that
++				// take down the whole simulator.
++				s.setTcpNoDelay(true);
++				in = s.getInputStream();
++				out = s.getOutputStream();
++			} catch (IOException e) {
++				log.warn("Client disconnected during connection setup: {}", e.getMessage());
++				try {
++					s.close();
++				} catch (IOException ignored) {
++					// nothing to clean up
++				}
++				continue;
++			}
+ 			log.info("Connection established...");
+-			InputStream in = s.getInputStream();
+-			OutputStream out = s.getOutputStream();
+ 			byte[] buffer = new byte[256];
+ 			long deviceTestStart = 0;
+ 			while (!s.isClosed()) {
