@@ -10,6 +10,15 @@
 		0623222911DA85143F1C3B82 /* EEPROMProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6C6C5380AA679EED9AAC1 /* EEPROMProvider.swift */; };
 		0760C8D3066625F9DF3B9F3C /* ECMInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9962BABDCA9800355E00628 /* ECMInfoView.swift */; };
 		0ED58E7EFDDA2E9024A693B5 /* BitSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECD3A2F9389F3BF338B828 /* BitSetModel.swift */; };
+		11AA22BB33CC44DD55EE66F1 /* EEPROMBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */; };
+		11AA22BB33CC44DD55EE66F3 /* ECM+EEPROMEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */; };
+		11AA22BB33CC44DD55EE66F5 /* EEPROMEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */; };
+		11AA22BB33CC44DD55EE6701 /* TorqueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6702 /* TorqueData.swift */; };
+		11AA22BB33CC44DD55EE6703 /* TorqueValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */; };
+		11AA22BB33CC44DD55EE6705 /* LogExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6706 /* LogExporter.swift */; };
+		11AA22BB33CC44DD55EE6707 /* SavedLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */; };
+		11AA22BB33CC44DD55EE6712 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6711 /* SerialPort.swift */; };
+		11AA22BB33CC44DD55EE6714 /* TCPSerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */; };
 		1BBA230A3FA95175353ED7FE /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 81878DD37A1EA72DA80D33C2 /* libsqlite3.tbd */; };
 		1DD744256FB5ED6CB4079C9C /* BLESerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66BEA981B0B69A036C7299A /* BLESerialPort.swift */; };
 		1E505A003963ADF9D8547C54 /* ecmdroid.db in Resources */ = {isa = PBXBuildFile; fileRef = 950D8487F5847E0478DC936B /* ecmdroid.db */; };
@@ -34,15 +43,6 @@
 		B1C573EAE1429B49B843CD5E /* ECM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9354C805C643860B33EF8628 /* ECM.swift */; };
 		B36178D86E034DA94CCA1995 /* TelitTIOAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7615DF0D9584235CD79C534C /* TelitTIOAdapter.swift */; };
 		BDFC440F3CB62CCB009F8885 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC675A232B83B8E4F8AD /* ContentView.swift */; };
-		11AA22BB33CC44DD55EE66F1 /* EEPROMBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */; };
-		11AA22BB33CC44DD55EE66F3 /* ECM+EEPROMEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */; };
-		11AA22BB33CC44DD55EE66F5 /* EEPROMEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */; };
-		11AA22BB33CC44DD55EE6712 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6711 /* SerialPort.swift */; };
-		11AA22BB33CC44DD55EE6714 /* TCPSerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */; };
-		11AA22BB33CC44DD55EE6701 /* TorqueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6702 /* TorqueData.swift */; };
-		11AA22BB33CC44DD55EE6703 /* TorqueValuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */; };
-		11AA22BB33CC44DD55EE6705 /* LogExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6706 /* LogExporter.swift */; };
-		11AA22BB33CC44DD55EE6707 /* SavedLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */; };
 		CC3D4E5F6A7B8C9D0E1F2A3B /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E5F6A7B8C9D0E1F2A3B4C /* SetupView.swift */; };
 		CD9A59C4717DFC07719CFD56 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678204A61C1DB47A8CEB7705 /* ConnectionStatusView.swift */; };
 		D01E227EC5C59A482103903D /* TroubleCodesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC462C7B98BA700F817E364A /* TroubleCodesView.swift */; };
@@ -57,6 +57,15 @@
 		023F53B8C398BE62EA0CCBD9 /* EEPROM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROM.swift; sourceTree = "<group>"; };
 		09ECD3A2F9389F3BF338B828 /* BitSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitSetModel.swift; sourceTree = "<group>"; };
 		0F0CF5BB2C045874C4EA4931 /* BLEAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEAdapterProtocol.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMBackup.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECM+EEPROMEditing.swift"; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMEditorView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6702 /* TorqueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueData.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueValuesView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6706 /* LogExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogExporter.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLogsView.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6711 /* SerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
+		11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPSerialPort.swift; sourceTree = "<group>"; };
 		11C04982F083F638CD3CEDAE /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		2CF5633B705197D1EB2A7FE1 /* CC254xAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CC254xAdapter.swift; sourceTree = "<group>"; };
 		31E7F16F2D0C7DFEC918F868 /* DataChannelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannelsView.swift; sourceTree = "<group>"; };
@@ -69,15 +78,6 @@
 		678204A61C1DB47A8CEB7705 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
 		6C6F6D9829ED9AF9A61B4CF3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		7381CC675A232B83B8E4F8AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE66F2 /* EEPROMBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMBackup.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE66F4 /* ECM+EEPROMEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECM+EEPROMEditing.swift"; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE66F6 /* EEPROMEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEPROMEditorView.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6711 /* SerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPSerialPort.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6702 /* TorqueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueData.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6704 /* TorqueValuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueValuesView.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6706 /* LogExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogExporter.swift; sourceTree = "<group>"; };
-		11AA22BB33CC44DD55EE6708 /* SavedLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLogsView.swift; sourceTree = "<group>"; };
 		7615DF0D9584235CD79C534C /* TelitTIOAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelitTIOAdapter.swift; sourceTree = "<group>"; };
 		778913282712D34176CEC520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81878DD37A1EA72DA80D33C2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -122,6 +122,15 @@
 				7381CC675A232B83B8E4F8AD /* ContentView.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		11AA22BB33CC44DD55EE6710 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				11AA22BB33CC44DD55EE6711 /* SerialPort.swift */,
+				11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */,
+			);
+			path = Transport;
 			sourceTree = "<group>";
 		};
 		53960EA043BE972BE33EBAD6 /* Frameworks */ = {
@@ -196,15 +205,6 @@
 				53960EA043BE972BE33EBAD6 /* Frameworks */,
 				C0A9CFF11800A6F34065306D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		11AA22BB33CC44DD55EE6710 /* Transport */ = {
-			isa = PBXGroup;
-			children = (
-				11AA22BB33CC44DD55EE6711 /* SerialPort.swift */,
-				11AA22BB33CC44DD55EE6713 /* TCPSerialPort.swift */,
-			);
-			path = Transport;
 			sourceTree = "<group>";
 		};
 		B64D65D9183256BC39704B0C /* Views */ = {
