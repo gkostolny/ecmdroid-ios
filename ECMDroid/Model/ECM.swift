@@ -45,6 +45,9 @@ class ECM {
     private var serialPort: (any SerialPort)?
     private var command: ECMCommand?
     private var readingTask: Task<Void, Never>?
+    // Token identifying the currently running read loop, so a stale loop that is
+    // dying (stopped or erroring) can't tear down state owned by a newer one.
+    private var readingSessionID: UUID?
     private let variableProvider = VariableProvider.shared
     private let bitsetProvider = BitSetProvider.shared
     private let eepromProvider = EEPROMProvider.shared
@@ -52,6 +55,14 @@ class ECM {
     private static let unknown = "N/A"
 
     private init() {}
+
+    /// Test seam: build an ECM around an already-constructed command (e.g. over a
+    /// fake transport) so the connection state machine can be exercised without
+    /// BLE or a live simulator. Not used by the app itself.
+    init(command: ECMCommand) {
+        self.command = command
+        self.isConnected = true
+    }
 
     var bleManagerInstance: BLEManager { bleManager }
 
@@ -140,29 +151,48 @@ class ECM {
     func startReading() {
         guard readingTask == nil else { return }
         isReading = true
+        let sessionID = UUID()
+        readingSessionID = sessionID
         readingTask = Task { [weak self] in
             while !Task.isCancelled {
-                guard let self = self, let cmd = self.command else { break }
+                // Stop if this run is no longer the current session (a stop or a
+                // restart raced us while we were in flight).
+                let current = await MainActor.run { self?.readingSessionID == sessionID }
+                guard current else { break }
+                let cmd = await MainActor.run { self?.command }
+                guard let cmd else { break }
                 do {
                     let data = try await cmd.readRTData()
                     await MainActor.run {
+                        guard let self, self.readingSessionID == sessionID else { return }
                         self.rtData = data
                     }
                 } catch {
                     await MainActor.run {
+                        guard let self, self.readingSessionID == sessionID else { return }
                         self.statusMessage = "Read error: \(error.localizedDescription)"
                     }
                     break
                 }
                 try? await Task.sleep(nanoseconds: 250_000_000) // 250ms
             }
+            // Loop exited (stopped, cancelled, or error). Clear state only if this
+            // run is still the current session, so a stale loop can't tear down a
+            // newer one. Crucially this also clears readingTask itself: a run that
+            // ended in an error used to leave a live task behind, which made every
+            // later startReading() a permanent no-op until reconnection.
             await MainActor.run {
-                self?.isReading = false
+                guard let self, self.readingSessionID == sessionID else { return }
+                self.readingSessionID = nil
+                self.readingTask = nil
+                self.isReading = false
             }
         }
     }
 
     func stopReading() {
+        // Invalidate the session first so the dying loop skips its own cleanup.
+        readingSessionID = nil
         readingTask?.cancel()
         readingTask = nil
         isReading = false

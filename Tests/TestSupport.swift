@@ -81,3 +81,53 @@ final class TestRunner {
 func sleepMs(_ ms: Int) async {
     try? await Task.sleep(nanoseconds: UInt64(ms) * 1_000_000)
 }
+
+/// A SerialPort that fails every read with unparseable bytes while counting
+/// read attempts. Lets tests drive ECM's live-reading loop into its error path
+/// without a device or simulator.
+actor FaultyRTPort: SerialPort {
+    private(set) var readAttempts = 0
+
+    func read(count: Int, timeout: TimeInterval) async throws -> [UInt8] {
+        readAttempts += 1
+        // All-zero bytes can never form a valid ECM header -> invalidResponse.
+        return [UInt8](repeating: 0x00, count: count)
+    }
+
+    func write(_ data: [UInt8]) async throws {}
+    func clearBuffer() {}
+}
+
+/// Models a strict request/response ECM: the in-flight answer sits in the input
+/// buffer, which clearBuffer() discards - exactly as stale bytes would be. Used
+/// to prove ECMCommand serializes concurrent callers (the simulator's forgiving
+/// behaviour would hide the bug).
+actor StrictECMPort: SerialPort {
+    private var buffer: [UInt8] = []
+    private let response: [UInt8]
+
+    init(response: [UInt8]) {
+        self.response = response
+    }
+
+    func clearBuffer() {
+        buffer.removeAll()
+    }
+
+    func write(_ data: [UInt8]) async throws {
+        buffer.append(contentsOf: response)
+    }
+
+    func read(count: Int, timeout: TimeInterval) async throws -> [UInt8] {
+        let deadline = Date().addingTimeInterval(timeout)
+        while buffer.count < count {
+            if Date() >= deadline {
+                throw ECMCommandError.timeout
+            }
+            try await Task.sleep(nanoseconds: 1_000_000)
+        }
+        let out = Array(buffer.prefix(count))
+        buffer.removeFirst(count)
+        return out
+    }
+}
