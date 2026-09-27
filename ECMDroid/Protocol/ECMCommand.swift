@@ -7,7 +7,6 @@ import Foundation
 
 actor ECMCommand {
     private let port: any SerialPort
-    private var receiveBuffer = [UInt8](repeating: 0, count: 256)
     // Real BLE round-trip latency (connection interval) plus 9600-baud serial transfer
     // through the dongle can exceed 1s for larger responses, especially the first
     // exchange right after connecting. 1.0s caused spurious "Timeout reading from ECM".
@@ -17,7 +16,31 @@ actor ECMCommand {
         self.port = port
     }
 
+    // Single-flight gate: only one request/response cycle may be in flight at a
+    // time. sendPDU() clears the port's input buffer before writing, so a second
+    // concurrent caller (e.g. the monitor poll racing the data-log poll) would
+    // discard the first caller's in-flight response bytes. The simulator
+    // tolerates that (it re-serves on its next poll), but a real ECM over a
+    // serial dongle desyncs until reconnect. Concurrent callers wait their turn
+    // instead. A short poll is used rather than a waiter queue so a cancelled
+    // caller can never wedge the gate.
+    private var gateHeld = false
+
+    private func acquireGate() async throws {
+        while gateHeld {
+            if Task.isCancelled { throw CancellationError() }
+            try await Task.sleep(nanoseconds: 1_000_000) // 1 ms
+        }
+        gateHeld = true
+    }
+
+    private func releaseGate() {
+        gateHeld = false
+    }
+
     func sendPDU(_ pdu: PDU) async throws -> PDU {
+        try await acquireGate()
+        defer { releaseGate() }
         // Drop any stale bytes left over from a previous timed-out exchange so
         // the response header parses from a clean packet boundary.
         await port.clearBuffer()
@@ -115,7 +138,7 @@ actor ECMCommand {
                 offset = 0xFF - page.length + i + 1
                 dtr = 1
             }
-            _ = try await sendPDU(PDU.setRequest(pageno: page.nr, offset: offset, data: buffer, pos: page.start + offset, len: dtr))
+            _ = try await sendPDU(try PDU.setRequest(pageno: page.nr, offset: offset, data: buffer, pos: page.start + offset, len: dtr))
             i += dtr
         }
     }

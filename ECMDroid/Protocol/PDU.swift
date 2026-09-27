@@ -57,7 +57,10 @@ struct PDU {
         return PDU(sender: DROID_ID, recipient: ecmID, payload: payload)
     }
 
-    static func setRequest(pageno: Int, offset: Int, data: [UInt8], pos: Int, len: Int) -> PDU {
+    static func setRequest(pageno: Int, offset: Int, data: [UInt8], pos: Int, len: Int) throws -> PDU {
+        guard len >= 0, pos >= 0, pos + len <= data.count else {
+            throw PDUError.outOfBounds("SET slice out of bounds: pos \(pos), len \(len), buffer \(data.count)")
+        }
         var payload = [UInt8](repeating: 0, count: 3 + len)
         payload[0] = CMD_SET
         payload[1] = UInt8(offset & 0xFF)
@@ -75,6 +78,9 @@ struct PDU {
     // MARK: - Init from raw packet (received)
 
     init(packet: [UInt8], length: Int) throws {
+        guard length >= 0, length <= packet.count else {
+            throw PDUError.shortPacket
+        }
         self.bytes = Array(packet[0..<length])
         try validate()
     }
@@ -195,6 +201,7 @@ enum PDUError: LocalizedError {
     case invalidHeader(String)
     case sizeMismatch(expected: Int, actual: Int)
     case checksumMismatch(expected: UInt8, actual: UInt8)
+    case outOfBounds(String)
 
     var errorDescription: String? {
         switch self {
@@ -202,6 +209,7 @@ enum PDUError: LocalizedError {
         case .invalidHeader(let msg): return "Invalid header: \(msg)"
         case .sizeMismatch(let exp, let act): return "Size mismatch (\(exp)/\(act))"
         case .checksumMismatch(let exp, let act): return "Invalid checksum (\(String(format: "%02X", exp))/\(String(format: "%02X", act)))"
+        case .outOfBounds(let msg): return msg
         }
     }
 }

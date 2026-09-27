@@ -93,6 +93,7 @@ class Variable {
     func updateValue(into data: inout [UInt8]) {
         guard !rawValues.isEmpty, !(rawValues[0] is NSNull) else { return }
         let co = offset < 0 ? data.count + offset : offset
+        guard co >= 0, co + size <= data.count else { return }
         var buffer = [UInt8](repeating: 0, count: size)
 
         let elemCount = size / width

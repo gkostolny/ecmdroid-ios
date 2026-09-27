@@ -42,7 +42,7 @@ func runUnitTests(_ t: TestRunner) async {
 
     await t.test("PDU: setRequest embeds the right slice of the buffer") {
         let data: [UInt8] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        let pdu = PDU.setRequest(pageno: 3, offset: 2, data: data, pos: 4, len: 3)
+        let pdu = try PDU.setRequest(pageno: 3, offset: 2, data: data, pos: 4, len: 3)
         // payload = [CMD_SET, offset, page, data[4], data[5], data[6]]
         t.expectEqual(Array(pdu.bytes[6..<12]), [0x57, 0x02, 0x03, 4, 5, 6], "SET payload")
     }
@@ -132,5 +132,90 @@ func runUnitTests(_ t: TestRunner) async {
         t.expect(!TorqueData.categories.isEmpty, "categories present")
         let specCount = TorqueData.categories.reduce(0) { $0 + $1.specs.count }
         t.expect(specCount > 10, "has a useful number of specs (got \(specCount))")
+    }
+
+    // MARK: - Regression tests (REVIEW.md 2026-09-26)
+
+    await t.test("PDU: init rejects a length past the end of the packet") {
+        _ = await t.expectThrows("length > packet.count must throw") {
+            _ = try PDU(packet: [0x01, 0x42, 0x00, 0x05, 0xFF, 0x02, 0x03, 0x04], length: 12)
+        }
+    }
+
+    await t.test("PDU: setRequest rejects an out-of-bounds slice") {
+        let data: [UInt8] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        _ = await t.expectThrows("pos+len past buffer end must throw") {
+            _ = try PDU.setRequest(pageno: 3, offset: 2, data: data, pos: 8, len: 5)
+        }
+    }
+
+    await t.test("Variable: updateValue refuses to write outside the buffer") {
+        let v = Variable()
+        v.type = .scalar
+        v.size = 2
+        v.width = 1
+        v.offset = 100 // beyond any sane buffer
+        v.initialize()
+        v.rawValues[0] = 42.0
+        var data = [UInt8](repeating: 0, count: 10)
+        v.updateValue(into: &data)
+        t.expect(data.allSatisfy { $0 == 0 }, "buffer untouched (no trap, no OOB write)")
+    }
+
+    await t.test("ECM: live reading restarts after a read error") {
+        let port = FaultyRTPort()
+        let ecm = ECM(command: ECMCommand(port: port))
+        ecm.startReading()
+
+        // The loop must fail on its first read...
+        let deadline = Date().addingTimeInterval(2)
+        while await port.readAttempts < 1, Date() < deadline { await sleepMs(5) }
+        let firstAttempts = await port.readAttempts
+        t.expect(firstAttempts >= 1, "read loop made an attempt")
+
+        // ...and its failed run must have cleaned up (isReading back to false).
+        while ecm.isReading, Date() < deadline { await sleepMs(5) }
+        t.expect(!ecm.isReading, "failed run cleared isReading")
+
+        // ...so restarting must actually start a new loop. Before the fix the
+        // stale task made this a permanent no-op.
+        ecm.startReading()
+        let restartDeadline = Date().addingTimeInterval(2)
+        while await port.readAttempts <= firstAttempts, Date() < restartDeadline { await sleepMs(5) }
+        t.expect(await port.readAttempts > firstAttempts,
+                 "read loop restarted after error (\(firstAttempts) -> \(await port.readAttempts))")
+        ecm.stopReading()
+    }
+
+    await t.test("ECMCommand: concurrent requests both complete (single-flight gate)") {
+        // A strict request/response device: each write queues one in-flight
+        // answer, and clearBuffer() destroys whatever is in flight. If two
+        // callers (as in the monitor poll racing the data-log poll) were to
+        // interleave, the second's clearBuffer would discard the first's answer.
+        let response = PDU(sender: PDU.getECMID(), recipient: PDU.DROID_ID, payload: [PDU.ACK, 0x11, 0x22])
+        let port = StrictECMPort(response: response.bytes)
+        let command = ECMCommand(port: port)
+
+        let results = await withTaskGroup(of: Result<[UInt8], Error>.self) { group in
+            var out: [Result<[UInt8], Error>] = []
+            for _ in 0..<2 {
+                group.addTask {
+                    do { return .success(try await command.readRTData()) }
+                    catch { return .failure(error) }
+                }
+            }
+            for await r in group { out.append(r) }
+            return out
+        }
+
+        t.expectEqual(results.count, 2, "two responses collected")
+        for (i, r) in results.enumerated() {
+            switch r {
+            case .success(let bytes):
+                t.expectEqual(bytes.count, response.bytes.count, "reader \(i) got the full response")
+            case .failure(let error):
+                t.expect(false, "reader \(i) failed: \(error.localizedDescription)")
+            }
+        }
     }
 }
